@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="9008" started-at="2018-04-19T07:18:09Z" finished-at="2018-04-19T07:18:18Z">
+  <suite name="Suite" duration-ms="10108" started-at="2018-04-23T08:52:45Z" finished-at="2018-04-23T08:52:55Z">
     <groups>
     </groups>
-    <test name="Test" duration-ms="9008" started-at="2018-04-19T07:18:09Z" finished-at="2018-04-19T07:18:18Z">
+    <test name="Test" duration-ms="10108" started-at="2018-04-23T08:52:45Z" finished-at="2018-04-23T08:52:55Z">
       <class name="example.NewTest">
-        <test-method status="PASS" signature="beforeTest()[pri:0, instance:example.NewTest@4a05c759]" name="beforeTest" is-config="true" duration-ms="3541" started-at="2018-04-19T14:18:09Z" finished-at="2018-04-19T14:18:12Z">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:example.NewTest@3cbd7173]" name="beforeTest" is-config="true" duration-ms="4882" started-at="2018-04-23T15:52:45Z" finished-at="2018-04-23T15:52:50Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="testEasy()[pri:0, instance:example.NewTest@4a05c759]" name="testEasy" duration-ms="4311" started-at="2018-04-19T14:18:12Z" finished-at="2018-04-19T14:18:16Z">
+        <test-method status="PASS" signature="testEasy()[pri:0, instance:example.NewTest@3cbd7173]" name="testEasy" duration-ms="4058" started-at="2018-04-23T15:52:50Z" finished-at="2018-04-23T15:52:54Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testEasy -->
-        <test-method status="PASS" signature="afterTest()[pri:0, instance:example.NewTest@4a05c759]" name="afterTest" is-config="true" duration-ms="1142" started-at="2018-04-19T14:18:16Z" finished-at="2018-04-19T14:18:18Z">
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:example.NewTest@3cbd7173]" name="afterTest" is-config="true" duration-ms="1150" started-at="2018-04-23T15:52:54Z" finished-at="2018-04-23T15:52:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterTest -->

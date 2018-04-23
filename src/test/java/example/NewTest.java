@@ -22,7 +22,19 @@ public class NewTest {
 		}	
 		@BeforeTest
 		public void beforeTest() {	
-			 System.setProperty("webdriver.chrome.driver", "D://Pho mat/DevOps/Software/chromedriver_win32/chromedriver.exe");
+			
+			 String os  = System.getProperty("os.name");
+			 System.out.println(os);
+			 
+			 if(os.toString().contains("Windows"))
+			 {
+				 System.setProperty("webdriver.chrome.driver", "D://Pho mat/DevOps/Software/chromedriver_win32/chromedriver.exe");
+			 }
+			 else
+			 {
+				 System.setProperty("webdriver.chrome.driver", "/var/chromedriver/chromedriver");
+			 }
+			 
 			 driver = new ChromeDriver();
 			
 			//**************************************************************
