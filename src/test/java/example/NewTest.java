@@ -34,6 +34,7 @@ public class NewTest {
 			 else
 			 {
 				 System.setProperty("webdriver.chrome.driver", "/home/duynn/Downloads/chromedriver");
+				 System.out.println( System.getProperty("webdriver.chrome.driver").toString());
 				 driver = new ChromeDriver();
 				 //donothing just install chrome driver on jenkin
 			 }
