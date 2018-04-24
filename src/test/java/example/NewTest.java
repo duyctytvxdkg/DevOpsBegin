@@ -29,14 +29,16 @@ public class NewTest {
 			 if(os.toString().contains("Windows"))
 			 {
 				 System.setProperty("webdriver.chrome.driver", "D://Pho mat/DevOps/Software/chromedriver_win32/chromedriver.exe");
+				 driver = new ChromeDriver();
 			 }
 			 else
 			 {
+				 driver = new FirefoxDriver();
 				// System.setProperty("webdriver.chrome.driver", "/var/chromedriver/chromedriver");
 				// donothing just install chrome driver on jenkin
 			 }
 			 
-			 driver = new ChromeDriver();
+			 
 			
 			//**************************************************************
 			//System.setProperty("webdriver.gecko.driver","D://Pho mat/DevOps/Software/geckodriver-v0.20.1-win64/geckodriver.exe"); 
