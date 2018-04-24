@@ -3,6 +3,7 @@ package example;
 
 import org.openqa.selenium.WebDriver;		
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;		
 import org.testng.annotations.Test;	
@@ -33,10 +34,11 @@ public class NewTest {
 			 }
 			 else
 			 {
-				 //System.setProperty("webdriver.chrome.driver", "/home/duynn/Downloads/chromedriver");
-				 //System.out.println( System.getProperty("webdriver.chrome.driver").toString());
+				 
 				 ChromeOptions ChromeOptions = new ChromeOptions();
 				 ChromeOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
+				 //System.setProperty("webdriver.chrome.driver", "/home/duynn/Downloads/chromedriver");
+				 System.out.println( System.getProperty("webdriver.chrome.driver").toString());
 				 driver = new ChromeDriver();
 				 //donothing just install chrome driver on jenkin
 			 }
