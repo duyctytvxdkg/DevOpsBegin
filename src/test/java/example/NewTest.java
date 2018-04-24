@@ -33,9 +33,9 @@ public class NewTest {
 			 }
 			 else
 			 {
-				 driver = new FirefoxDriver();
-				// System.setProperty("webdriver.chrome.driver", "/var/chromedriver/chromedriver");
-				// donothing just install chrome driver on jenkin
+				 System.setProperty("webdriver.chrome.driver", "/home/duynn/Downloads/chromedriver");
+				 driver = new ChromeDriver();
+				 //donothing just install chrome driver on jenkin
 			 }
 			 
 			 
