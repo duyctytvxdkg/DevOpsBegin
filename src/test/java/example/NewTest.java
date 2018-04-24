@@ -32,7 +32,8 @@ public class NewTest {
 			 }
 			 else
 			 {
-				 System.setProperty("webdriver.chrome.driver", "/var/chromedriver/chromedriver");
+				// System.setProperty("webdriver.chrome.driver", "/var/chromedriver/chromedriver");
+				// donothing just install chrome driver on jenkin
 			 }
 			 
 			 driver = new ChromeDriver();
