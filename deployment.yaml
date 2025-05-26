@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-udtn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-udtn
+  template:
+    metadata:
+      labels:
+        app: hello-udtn
+    spec:
+      containers:
+        - name: hello-container
+          image: <your-dockerhub-username>/hello-udtn:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/share/nginx/html/config.json
+              subPath: config.json
+      volumes:
+        - name: config-volume
+          configMap:
+            name: hello-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello-config
+data:
+  config.json: |
+    {
+      "version": "1.0.0",
+      "podName": "$(POD_NAME)",
+      "nodeName": "$(NODE_NAME)"
+    }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: hello-udtn

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello UDTN!</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background-color: #f4f4f4; }
+    h1 { color: #333; }
+    pre { background-color: #fff; padding: 10px; border: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+  <h1>Hello UDTN!</h1>
+  <div id="info"><pre>Loading...</pre></div>
+
+  <script>
+    async function loadInfo() {
+      const res = await fetch('/config.json');
+      const config = await res.json();
+      const dateTime = new Date().toLocaleString();
+      const podName = config.podName || "unknown";
+      const nodeName = config.nodeName || "unknown";
+      const version = config.version || "1.0.0";
+
+      document.getElementById("info").innerHTML = `
+Ngày giờ: ${dateTime}
+Pod name: ${podName}
+Node name: ${nodeName}
+Version: ${version}
+      `;
+    }
+    loadInfo();
+  </script>
+</body>
+</html>
