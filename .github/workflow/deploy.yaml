@@ -1,41 +1,35 @@
-name: Deploy to EKS
+name: CI/CD to Kubernetes
 
 on:
   push:
     branches:
       - main
 
-env:
-  EKS_CLUSTER_NAME: your-cluster
-  AWS_REGION: your-region
-  IMAGE_NAME: hello-udtn
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout source code
       uses: actions/checkout@v3
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v2
+    - name: Login DockerHub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+    - name: Build image
+      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/hello-udtn:latest .
+
+    - name: Push image
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/hello-udtn:latest
+
+    - name: Deploy to Kubernetes (via SSH)
+      uses: appleboy/ssh-action@master
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ env.AWS_REGION }}
-
-    - name: Login to DockerHub
-      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-
-    - name: Build and push Docker image
-      run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest .
-        docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
-
-    - name: Update kubeconfig
-      run: aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION
-
-    - name: Deploy to EKS
-      run: |
-        kubectl apply -f deployment.yaml
+        host: ${{ secrets.K8S_MASTER_IP }}
+        username: ${{ secrets.K8S_USER }}
+        key: ${{ secrets.K8S_SSH_PRIVATE_KEY }}
+        script: |
+          cd ~/hello-udtn || git clone https://github.com/duyctytvxdkg/DevOpsBegin.git ~/hello-udtn && cd ~/hello-udtn
+          git pull
+          sudo kubectl apply -f k8s/deployment-group1.yaml
+          sudo kubectl apply -f k8s/deployment-group2.yaml

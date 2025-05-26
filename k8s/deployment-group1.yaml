@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-group1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-udtn
+      group: group1
+  template:
+    metadata:
+      labels:
+        app: hello-udtn
+        group: group1
+    spec:
+      containers:
+        - name: hello-container
+          image: duyctytvxdkg/hello-udtn:latest
+          ports:
+            - containerPort: 80
+      nodeSelector:
+        nodegroup: group1
