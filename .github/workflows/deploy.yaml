@@ -27,7 +27,7 @@ jobs:
       with:
         host: ${{ secrets.K8S_MASTER_IP }}                    # ví dụ: ec2-18-212-253-219.compute-1.amazonaws.com
         username: ${{ secrets.K8S_USER }}                     # thường là 'ubuntu' nếu là EC2
-        key: ${{ secrets.K8S_SSH_PRIVATE_KEY }}               # chính là nội dung file .pem
+        key: ${{ secrets.EC2_SSH_KEY }}               # chính là nội dung file .pem 
         port: 22
         script: |
           if [ ! -d ~/hello-udtn ]; then
