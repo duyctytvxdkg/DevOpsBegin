@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
- 
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -16,20 +16,24 @@ jobs:
     - name: Login DockerHub
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-    - name: Build image
+    - name: Build Docker image
       run: docker build -t ${{ secrets.DOCKER_USERNAME }}/hello-udtn:latest .
 
-    - name: Push image
+    - name: Push Docker image
       run: docker push ${{ secrets.DOCKER_USERNAME }}/hello-udtn:latest
 
     - name: Deploy to Kubernetes (via SSH)
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.K8S_MASTER_IP }}
-        username: ${{ secrets.K8S_USER }}
-        key: ${{ secrets.K8S_SSH_PRIVATE_KEY }}
+        host: ${{ secrets.K8S_MASTER_IP }}                    # ví dụ: ec2-18-212-253-219.compute-1.amazonaws.com
+        username: ${{ secrets.K8S_USER }}                     # thường là 'ubuntu' nếu là EC2
+        key: ${{ secrets.K8S_SSH_PRIVATE_KEY }}               # chính là nội dung file .pem
+        port: 22
         script: |
-          cd ~/hello-udtn || git clone https://github.com/duyctytvxdkg/DevOpsBegin.git ~/hello-udtn && cd ~/hello-udtn
-          git pull
+          if [ ! -d ~/hello-udtn ]; then
+            git clone https://github.com/duyctytvxdkg/DevOpsBegin.git ~/hello-udtn
+          fi
+          cd ~/hello-udtn
+          git pull origin master
           sudo kubectl apply -f k8s/deployment-group1.yaml
           sudo kubectl apply -f k8s/deployment-group2.yaml
