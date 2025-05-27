@@ -30,7 +30,6 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}               # chính là nội dung file .pem 
         port: 22
         script: |
-          export KUBECONFIG=/etc/kubernetes/admin.conf
           if [ ! -d ~/hello-udtn ]; then
             git clone https://github.com/duyctytvxdkg/DevOpsBegin.git ~/hello-udtn
           fi
